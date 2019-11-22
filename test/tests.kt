@@ -318,4 +318,40 @@ class FieldTest {
 
         assertEquals(4, newField.longestX())
     }
+
+    @Test
+    fun aTestForBigTest() {
+
+        val newField = Field(6)
+
+        for (row in 0 until (newField.size)/2)
+            for (column in 0 until (newField.size/2 + 1))
+                newField.set(Cell(row, column), Mark.X)
+
+        newField.cellClear(Cell(0, 3))
+
+        newField.set(Cell(0, 4), Mark.X)
+        newField.set(Cell(4, 0), Mark.X)
+        newField.set(Cell(3, 1), Mark.X)
+
+
+        assertEquals(5, newField.longestX())
+    }
+
+    @Test
+    fun testForCheckTime() {
+
+        val newField = Field(2500)
+
+        for (row in 0 until (newField.size)/2)
+            for (column in 0 until (newField.size)/2)
+                newField.set(Cell(row, column), Mark.X)
+
+        newField.set(Cell(1250, 0), Mark.X)
+
+        assertEquals(1251, newField.longestX())
+    //this test run for(in) ~ 133-134 seconds
+    }
+    // test for field 1k cells is run for(in) ~10-13 seconds on my PC
+    // For Field ~10000 Cells out of kotlin map : in fun set(cell: Cell, value: Mark) { ... }
 }
